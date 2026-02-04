@@ -581,7 +581,7 @@ class AssessmentApp:
             self.log("Waiting for WAIT_COMBO from ESP...")
             got_wait = False
             wait_start = time.time()
-            while time.time() - wait_start < 200:  # 200s timeout waiting for WAIT_COMBO
+            while time.time() - wait_start < 60:  # 60s timeout waiting for WAIT_COMBO
                 ln = self.serial.get_msg_nowait(timeout=0.2)
                 if ln:
                     self.log("ESP ->", ln)
@@ -593,6 +593,7 @@ class AssessmentApp:
                 time.sleep(0.01)
             if not got_wait:
                 self.log("Timeout waiting for WAIT_COMBO; retrying...")
+                self.serial.send_line("WAIT_COMBO")
                 continue
 
             # choose combo and send
