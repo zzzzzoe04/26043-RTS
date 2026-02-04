@@ -233,7 +233,7 @@ void loop() {
                             stim_flag = false;
                             rest_flag = false;
                             msg_flag = false; return;}
-                        if (combo == "WAIT_COMBO") { Serial.println("#WAIT_COMBO"); return;}
+                        if (combo == "WAIT_COMBO" || combo == "WAIT_COMBO" || combo == "WAIT_COMBO") { Serial.println("#WAIT_COMBO"); return;}
                         if (combo == "ASSESS") { Serial.println("#OK"); return;}
                         if (combo == "" || combo == "COMBO") {
                             combo = Serial.readStringUntil('\n'); // read the next incoming line
@@ -315,6 +315,7 @@ void loop() {
                         fresh_start = true; 
                         TIMEOUT = millis() + 60000; // reset the timeout
                         Serial.println("#TRIAL_DONE");
+                        delay(5);
                         Serial.println("#WAIT_COMBO");
                 }
                 if (millis()< trial_end - 250) { // if no, check if rest phase has started, 
